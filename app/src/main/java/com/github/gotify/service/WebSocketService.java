@@ -9,6 +9,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Color;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
 import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
@@ -278,9 +280,15 @@ public class WebSocketService extends Service {
             Map<String, Object> extras,
             Long appid) {
 
-        //call vibrator
-        Vibrator vibrator = (Vibrator)this.getSystemService(this.VIBRATOR_SERVICE);
-        vibrator.vibrate(600);
+        if(priority>5) {        //call vibrator
+            Vibrator vibrator = (Vibrator) this.getSystemService(this.VIBRATOR_SERVICE);
+            vibrator.vibrate(500);
+
+            //call ringtone
+            Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Ringtone rt = RingtoneManager.getRingtone(getApplicationContext(), uri);
+            rt.play();
+        }
 
         Intent intent;
 
