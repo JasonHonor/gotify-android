@@ -13,6 +13,8 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.IBinder;
+import android.os.Vibrator;
+
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
@@ -275,6 +277,10 @@ public class WebSocketService extends Service {
             long priority,
             Map<String, Object> extras,
             Long appid) {
+
+        //call vibrator
+        Vibrator vibrator = (Vibrator)this.getSystemService(this.VIBRATOR_SERVICE);
+        vibrator.vibrate(600);
 
         Intent intent;
 
