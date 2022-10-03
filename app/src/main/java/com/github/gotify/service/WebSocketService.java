@@ -353,7 +353,7 @@ public class WebSocketService extends Service {
     public void showNotificationGroup(long priority) {
         Intent intent = new Intent(this, MessagesActivity.class);
         PendingIntent contentIntent =
-                PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+                PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT|PendingIntent.FLAG_IMMUTABLE);
 
         NotificationCompat.Builder b =
                 new NotificationCompat.Builder(
