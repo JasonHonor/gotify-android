@@ -25,11 +25,13 @@ import com.github.gotify.Utils;
 import com.github.gotify.client.model.Message;
 import com.github.gotify.messages.provider.MessageWithImage;
 import com.squareup.picasso.Picasso;
+
+import org.threeten.bp.OffsetDateTime;
+
 import io.noties.markwon.Markwon;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.List;
-import org.threeten.bp.OffsetDateTime;
 
 public class ListMessageAdapter extends RecyclerView.Adapter<ListMessageAdapter.ViewHolder> {
 
@@ -162,7 +164,10 @@ public class ListMessageAdapter extends RecyclerView.Adapter<ListMessageAdapter.
                     text = Utils.dateToRelative(dateTime);
                 } else {
                     // Absolute time format
-                    long time = dateTime.toInstant().toEpochMilli();
+                    long time = 0;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        time = dateTime.toInstant().toEpochMilli();
+                    }
                     Date date = new Date(time);
                     if (DateUtils.isToday(time)) {
                         text = DateFormat.getTimeInstance(DateFormat.SHORT).format(date);
